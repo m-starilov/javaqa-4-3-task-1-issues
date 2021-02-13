@@ -4,8 +4,7 @@ import org.junit.jupiter.api.*;
 import ru.netology.domain.Issue;
 import ru.netology.domain.Tag;
 import ru.netology.domain.User;
-import ru.netology.domain.comparators.NewestFirst;
-import ru.netology.domain.comparators.OldestFirst;
+import ru.netology.domain.comparators.*;
 import ru.netology.manager.IssueManager;
 import ru.netology.repository.IssueRepository;
 
@@ -17,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IssueManagerTest {
-    private final IssueRepository repository = new IssueRepository();
+    private IssueRepository repository = new IssueRepository();
     private IssueManager manager = new IssueManager(repository);
     private NewestFirst newestFirstComparator = new NewestFirst();
     private OldestFirst oldestFirstComparator = new OldestFirst();
