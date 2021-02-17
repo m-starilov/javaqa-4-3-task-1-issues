@@ -1,55 +1,52 @@
 package ru.netology.com.manager;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import ru.netology.domain.Issue;
 import ru.netology.domain.Tag;
 import ru.netology.domain.User;
-import ru.netology.domain.comparators.*;
 import ru.netology.manager.IssueManager;
 import ru.netology.repository.IssueRepository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IssueManagerTest {
-    private IssueRepository repository = new IssueRepository();
-    private IssueManager manager = new IssueManager(repository);
-    private NewestFirst newestFirstComparator = new NewestFirst();
-    private OldestFirst oldestFirstComparator = new OldestFirst();
-    private HashSet<Tag> tags = new HashSet<>();
-    private HashSet<User> assignee = new HashSet<>();
+    private final IssueRepository repository = new IssueRepository();
+    private final IssueManager manager = new IssueManager(repository);
+    private final HashSet<Tag> tags = new HashSet<>();
+    private final HashSet<User> assignee = new HashSet<>();
 
-    private User user01 = new User(1, "user01");
-    private User user02 = new User(2, "user02");
-    private User user03 = new User(3, "user03");
-    private User user1 = new User(4, "user1");
-    private User user2 = new User(5, "user2");
-    private User user3 = new User(6, "user3");
+    private final User user01 = new User(1, "user01");
+    private final User user02 = new User(2, "user02");
+    private final User user03 = new User(3, "user03");
+    private final User user1 = new User(4, "user1");
+    private final User user2 = new User(5, "user2");
+    private final User user3 = new User(6, "user3");
 
-    private Tag tag1 = new Tag("tag1");
-    private Tag tag2 = new Tag("tag2");
-    private Tag tag3 = new Tag("tag3");
-    private Tag tag4 = new Tag("tag4");
+    private final Tag tag1 = new Tag("tag1");
+    private final Tag tag2 = new Tag("tag2");
+    private final Tag tag3 = new Tag("tag3");
+    private final Tag tag4 = new Tag("tag4");
 
-    private Issue issue1 = new Issue();
-    private Issue issue2 = new Issue();
-    private Issue issue3 = new Issue();
-    private Issue issue4 = new Issue();
-    private Issue issue5 = new Issue();
-    private Issue issue6 = new Issue();
-    private Issue issue7 = new Issue();
-    private Issue issue8 = new Issue();
-    private Issue issue9 = new Issue();
+    private final Issue issue1 = new Issue();
+    private final Issue issue2 = new Issue();
+    private final Issue issue3 = new Issue();
+    private final Issue issue4 = new Issue();
+    private final Issue issue5 = new Issue();
+    private final Issue issue6 = new Issue();
+    private final Issue issue7 = new Issue();
+    private final Issue issue8 = new Issue();
+    private final Issue issue9 = new Issue();
 
     public void setIssues() {
+        Calendar cal = Calendar.getInstance();
 
         issue1.setId(1);
-        issue1.setDate(new Date(120, 5, 4, 12, 15, 0));
-        issue1.setUpdate(new Date(120, 5, 5, 12, 15, 0));
+        issue1.setDate(new Date(120, Calendar.JUNE, 4, 12, 15, 0));
+        issue1.setUpdate(new Date(120, Calendar.JUNE, 5, 12, 15, 0));
         issue1.setType(Issue.bug);
         issue1.setTitle("title 1");
         issue1.setText("text 1");
@@ -62,8 +59,8 @@ public class IssueManagerTest {
 
 
         issue2.setId(2);
-        issue2.setDate(new Date(120, 4, 2, 12, 12, 0));
-        issue2.setUpdate(new Date(120, 4, 2, 12, 12, 0));
+        issue2.setDate(new Date(120, Calendar.MAY, 2, 12, 12, 0));
+        issue2.setUpdate(new Date(120, Calendar.MAY, 2, 12, 12, 0));
         issue2.setType(Issue.bug);
         issue2.setTitle("title 2");
         issue2.setText("text 2");
@@ -75,8 +72,8 @@ public class IssueManagerTest {
 
 
         issue3.setId(3);
-        issue3.setDate(new Date(120, 4, 3, 12, 13, 0));
-        issue3.setUpdate(new Date(120, 4, 3, 12, 13, 0));
+        issue3.setDate(new Date(120, Calendar.MAY, 3, 12, 13, 0));
+        issue3.setUpdate(new Date(120, Calendar.MAY, 3, 12, 13, 0));
         issue3.setType(Issue.bug);
         issue3.setTitle("title 3");
         issue3.setText("text 3");
@@ -89,8 +86,8 @@ public class IssueManagerTest {
 
 
         issue4.setId(4);
-        issue4.setDate(new Date(120, 4, 4, 12, 14, 0));
-        issue4.setUpdate(new Date(120, 4, 4, 12, 14, 0));
+        issue4.setDate(new Date(120, Calendar.MAY, 4, 12, 14, 0));
+        issue4.setUpdate(new Date(120, Calendar.MAY, 4, 12, 14, 0));
         issue4.setType(Issue.bug);
         issue4.setTitle("title 4");
         issue4.setText("text 4");
@@ -103,8 +100,8 @@ public class IssueManagerTest {
 
 
         issue5.setId(5);
-        issue5.setDate(new Date(120, 8, 4, 12, 15, 0));
-        issue5.setUpdate(new Date(120, 8, 4, 12, 15, 0));
+        issue5.setDate(new Date(120, Calendar.SEPTEMBER, 4, 12, 15, 0));
+        issue5.setUpdate(new Date(120, Calendar.SEPTEMBER, 4, 12, 15, 0));
         issue5.setType(Issue.bug);
         issue5.setTitle("title 5");
         issue5.setText("text 5");
@@ -116,8 +113,8 @@ public class IssueManagerTest {
 
 
         issue6.setId(6);
-        issue6.setDate(new Date(121, 1, 4, 12, 15, 0));
-        issue6.setUpdate(new Date(121, 1, 4, 12, 15, 0));
+        issue6.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        issue6.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
         issue6.setType(Issue.question);
         issue6.setTitle("title 6");
         issue6.setText("text 6");
@@ -130,8 +127,8 @@ public class IssueManagerTest {
 
 
         issue7.setId(7);
-        issue7.setDate(new Date(121, 1, 4, 12, 15, 0));
-        issue7.setUpdate(new Date(121, 1, 4, 12, 15, 0));
+        issue7.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        issue7.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
         issue7.setType(Issue.question);
         issue7.setTitle("title 7");
         issue7.setText("text 7");
@@ -143,8 +140,8 @@ public class IssueManagerTest {
 
 
         issue8.setId(8);
-        issue8.setDate(new Date(121, 1, 4, 12, 15, 0));
-        issue8.setUpdate(new Date(121, 1, 4, 12, 15, 0));
+        issue8.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        issue8.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
         issue8.setType(Issue.bug);
         issue8.setTitle("title 8");
         issue8.setText("text 8");
@@ -156,8 +153,8 @@ public class IssueManagerTest {
 
 
         issue9.setId(9);
-        issue9.setDate(new Date(121, 1, 4, 12, 15, 0));
-        issue9.setUpdate(new Date(121, 1, 4, 12, 15, 0));
+        issue9.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        issue9.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
         issue9.setType(Issue.feature);
         issue9.setTitle("title 9");
         issue9.setText("text 9");
@@ -722,7 +719,7 @@ public class IssueManagerTest {
 
         @Test
         void shouldSortedByNewest() {
-            List<Issue> actual = manager.sortIssues(newestFirstComparator);
+            List<Issue> actual = manager.sortIssuesByNewest();
             List<Issue> expected = List.of(issue6, issue5, issue1, issue4, issue3, issue2);
 
             assertEquals(expected, actual);
@@ -730,7 +727,7 @@ public class IssueManagerTest {
 
         @Test
         void shouldSortedByOldest() {
-            List<Issue> actual = manager.sortIssues(oldestFirstComparator);
+            List<Issue> actual = manager.sortIssuesByOldest();
             List<Issue> expected = List.of(issue2, issue3, issue4, issue1, issue5, issue6);
 
             assertEquals(expected, actual);

@@ -6,11 +6,10 @@ import ru.netology.domain.User;
 import ru.netology.repository.IssueRepository;
 
 import java.util.*;
-
-import static ru.netology.domain.IssuePredicates.*;
+import java.util.stream.Collectors;
 
 public class IssueManager {
-    private IssueRepository repository;
+    private final IssueRepository repository;
 
     public IssueManager(IssueRepository repository) {
         this.repository = repository;
@@ -74,22 +73,28 @@ public class IssueManager {
     }
 
     public List<Issue> filterByAuthor(User author) {
-        return filterIssues(repository.findAll(), thisAuthor(author));
+        return repository.findAll().stream().filter(issue -> issue.getAuthor().equals(author)).collect(Collectors.toList());
     }
 
-    public List<Issue> filterByLabel(HashSet<Tag> tag) {
-        if (tag.isEmpty()) return List.of();
-        return filterIssues(repository.findAll(), thisLabel(tag));
+    public List<Issue> filterByLabel(HashSet<Tag> tags) {
+        if (tags.isEmpty()) return List.of();
+        return repository.findAll().stream().filter(issue -> issue.getTags().containsAll(tags)).collect(Collectors.toList());
     }
 
-    public List<Issue> filterByAssignee(HashSet<User> assignee) {
-        if (assignee.isEmpty()) return List.of();
-        return filterIssues(repository.findAll(), thisAssignee(assignee));
+    public List<Issue> filterByAssignee(HashSet<User> assignees) {
+        if (assignees.isEmpty()) return List.of();
+        return repository.findAll().stream().filter(issue -> issue.getAssignees().containsAll(assignees)).collect(Collectors.toList());
     }
 
-    public List<Issue> sortIssues(Comparator<Issue> comparator) {
+    public List<Issue> sortIssuesByNewest() {
         List<Issue> sortedIssues = repository.findAll();
-        sortedIssues.sort(comparator);
+        sortedIssues.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
+        return sortedIssues;
+    }
+
+    public List<Issue> sortIssuesByOldest() {
+        List<Issue> sortedIssues = repository.findAll();
+        sortedIssues.sort(Comparator.comparing(Issue::getDate));
         return sortedIssues;
     }
 
