@@ -41,12 +41,18 @@ public class IssueManagerTest {
     private final Issue issue8 = new Issue();
     private final Issue issue9 = new Issue();
 
+
+
     public void setIssues() {
-        Calendar cal = Calendar.getInstance();
+
+        Calendar date;
+        Calendar update;
 
         issue1.setId(1);
-        issue1.setDate(new Date(120, Calendar.JUNE, 4, 12, 15, 0));
-        issue1.setUpdate(new Date(120, Calendar.JUNE, 5, 12, 15, 0));
+        date = new GregorianCalendar(2020, Calendar.JUNE,4,12, 15);
+        issue1.setDate(date);
+        update = new GregorianCalendar(2020, Calendar.JUNE,5,12, 15);
+        issue1.setUpdate(update);
         issue1.setType(Issue.bug);
         issue1.setTitle("title 1");
         issue1.setText("text 1");
@@ -59,8 +65,10 @@ public class IssueManagerTest {
 
 
         issue2.setId(2);
-        issue2.setDate(new Date(120, Calendar.MAY, 2, 12, 12, 0));
-        issue2.setUpdate(new Date(120, Calendar.MAY, 2, 12, 12, 0));
+        date = new GregorianCalendar(2020, Calendar.MAY, 2, 12, 12);
+        issue2.setDate(date);
+        update = new GregorianCalendar(2020, Calendar.MAY, 2, 12, 12);
+        issue2.setUpdate(update);
         issue2.setType(Issue.bug);
         issue2.setTitle("title 2");
         issue2.setText("text 2");
@@ -72,8 +80,10 @@ public class IssueManagerTest {
 
 
         issue3.setId(3);
-        issue3.setDate(new Date(120, Calendar.MAY, 3, 12, 13, 0));
-        issue3.setUpdate(new Date(120, Calendar.MAY, 3, 12, 13, 0));
+        date = new GregorianCalendar(2020, Calendar.MAY, 3, 12, 13);
+        issue3.setDate(date);
+        update = new GregorianCalendar(2020, Calendar.MAY, 3, 12, 13);
+        issue3.setUpdate(update);
         issue3.setType(Issue.bug);
         issue3.setTitle("title 3");
         issue3.setText("text 3");
@@ -86,8 +96,10 @@ public class IssueManagerTest {
 
 
         issue4.setId(4);
-        issue4.setDate(new Date(120, Calendar.MAY, 4, 12, 14, 0));
-        issue4.setUpdate(new Date(120, Calendar.MAY, 4, 12, 14, 0));
+        date = new GregorianCalendar(2020, Calendar.MAY, 4, 12, 14);
+        issue4.setDate(date);
+        update = new GregorianCalendar(2020, Calendar.MAY, 4, 12, 14);
+        issue4.setUpdate(update);
         issue4.setType(Issue.bug);
         issue4.setTitle("title 4");
         issue4.setText("text 4");
@@ -100,8 +112,10 @@ public class IssueManagerTest {
 
 
         issue5.setId(5);
-        issue5.setDate(new Date(120, Calendar.SEPTEMBER, 4, 12, 15, 0));
-        issue5.setUpdate(new Date(120, Calendar.SEPTEMBER, 4, 12, 15, 0));
+        date = new GregorianCalendar(2020, Calendar.SEPTEMBER, 4, 12, 15);
+        issue5.setDate(date);
+        update = new GregorianCalendar(2020, Calendar.SEPTEMBER, 4, 12, 15);
+        issue5.setUpdate(update);
         issue5.setType(Issue.bug);
         issue5.setTitle("title 5");
         issue5.setText("text 5");
@@ -113,8 +127,10 @@ public class IssueManagerTest {
 
 
         issue6.setId(6);
-        issue6.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
-        issue6.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        date = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue6.setDate(date);
+        update = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue6.setUpdate(update);
         issue6.setType(Issue.question);
         issue6.setTitle("title 6");
         issue6.setText("text 6");
@@ -127,8 +143,10 @@ public class IssueManagerTest {
 
 
         issue7.setId(7);
-        issue7.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
-        issue7.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        date = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue7.setDate(date);
+        update = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue7.setUpdate(update);
         issue7.setType(Issue.question);
         issue7.setTitle("title 7");
         issue7.setText("text 7");
@@ -140,8 +158,10 @@ public class IssueManagerTest {
 
 
         issue8.setId(8);
-        issue8.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
-        issue8.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        date = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue8.setDate(date);
+        update = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue8.setUpdate(update);
         issue8.setType(Issue.bug);
         issue8.setTitle("title 8");
         issue8.setText("text 8");
@@ -153,8 +173,10 @@ public class IssueManagerTest {
 
 
         issue9.setId(9);
-        issue9.setDate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
-        issue9.setUpdate(new Date(121, Calendar.FEBRUARY, 4, 12, 15, 0));
+        date = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue9.setDate(date);
+        update = new GregorianCalendar(2021, Calendar.FEBRUARY, 4, 12, 15);
+        issue9.setUpdate(update);
         issue9.setType(Issue.feature);
         issue9.setTitle("title 9");
         issue9.setText("text 9");
@@ -381,9 +403,8 @@ public class IssueManagerTest {
         @Test
         public void shouldGetById() {
             Issue actual = manager.getById(1);
-            Issue expected = issue1;
 
-            assertEquals(expected, actual);
+            assertEquals(issue1, actual);
         }
 
         @Test

@@ -7,6 +7,7 @@ import ru.netology.repository.IssueRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class IssueManager {
     private final IssueRepository repository;
@@ -73,17 +74,20 @@ public class IssueManager {
     }
 
     public List<Issue> filterByAuthor(User author) {
-        return repository.findAll().stream().filter(issue -> issue.getAuthor().equals(author)).collect(Collectors.toList());
+        Stream<Issue> stream = repository.findAll().stream();
+        return stream.filter(issue -> issue.getAuthor().equals(author)).collect(Collectors.toList());
     }
 
     public List<Issue> filterByLabel(HashSet<Tag> tags) {
         if (tags.isEmpty()) return List.of();
-        return repository.findAll().stream().filter(issue -> issue.getTags().containsAll(tags)).collect(Collectors.toList());
+        Stream<Issue> stream = repository.findAll().stream();
+        return stream.filter(issue -> issue.getTags().containsAll(tags)).collect(Collectors.toList());
     }
 
     public List<Issue> filterByAssignee(HashSet<User> assignees) {
         if (assignees.isEmpty()) return List.of();
-        return repository.findAll().stream().filter(issue -> issue.getAssignees().containsAll(assignees)).collect(Collectors.toList());
+        Stream<Issue> stream = repository.findAll().stream();
+        return stream.filter(issue -> issue.getAssignees().containsAll(assignees)).collect(Collectors.toList());
     }
 
     public List<Issue> sortIssuesByNewest() {
@@ -102,7 +106,7 @@ public class IssueManager {
         Issue issue = getById(id);
         if (issue.isClosed()) {
             issue.setClosed(false);
-            issue.setUpdate(new Date());
+            issue.setUpdate(Calendar.getInstance());
         }
         return true;
     }
@@ -111,7 +115,7 @@ public class IssueManager {
         Issue issue = getById(id);
         if (!issue.isClosed()) {
             issue.setClosed(true);
-            issue.setUpdate(new Date());
+            issue.setUpdate(Calendar.getInstance());
         }
         return true;
     }

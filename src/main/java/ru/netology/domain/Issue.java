@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashSet;
 
 @NoArgsConstructor
@@ -12,8 +12,8 @@ import java.util.HashSet;
 @Data
 public class Issue {
     private int id;
-    private Date date;
-    private Date update;
+    private Calendar date;
+    private Calendar update;
     private String type;
     private String title;
     private String text;
